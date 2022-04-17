@@ -1,0 +1,18 @@
+{% include 'nav.html' %}
+<link rel="stylesheet" href= "{{ url_for('static',filename='styles/home.css') }}">
+<link rel="stylesheet" href= "{{ url_for('static',filename='employee/home.css') }}">
+
+        
+               
+                <div class="details alert alert-primary">
+                {% for i in range(0,12):%}
+                  
+                    <h5><b>{{col_name[i][0].capitalize()}} :             </b>{{data[0][i]}}</h5>
+                  
+                  {% endfor %}
+                </div>
+
+              
+      
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+</html><link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link rel="stylesheet" href="employee.css">   
+<title>Book ticket</title>
+</head>
+<body>
+
+{% include 'nav.html' %}
+
+<div class="card bg-light book"  >
+<article class="card-body mx-auto" style="max-width: 400px;">
+	{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+    {{message}}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+	<h3 class="card-title mt-3 text-center" style="
+    margin-bottom : 40px;" >Book ticket</h3>
+
+
+	<form action="{{url_for('book', flight_num=flight_data[0][0])}}" method="post">
+
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="first_name" class="form-control" placeholder="First name " type="text" >
+    </div> <!-- form-group// -->
+   
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		</div>
+        <input name="last_name" class="form-control" placeholder="Last name" type="text" >
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+        <!-- <p style="margin-top:13px;">name</p> -->
+    	<div class="input-group-prepend">
+            
+		    <span class="input-group-text"> <i class="fa fa-calendar-times"></i> </span>
+		</div>
+        <input name="dob" class="form-control" placeholder="DOB"
+        onfocus="(this.type='date')" type="text" >
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-flag"></i> </span>
+		</div>
+        <input name="Nationality" class="form-control" placeholder="Nationality" type="text"  >
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-flag"></i> </span>
+		</div>
+        <select name="classtype" class="form-control" id="exampleFormControlSelect1" aria-placeholder="class">
+        <option value="" disabled selected>Class</option>
+      <option value="business">Business</option>
+      <option value="economy">Economy</option>
+    </select>
+    </div> 
+   
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i  class="fas fa-venus-mars"></i> </span>
+		</div>
+        <select name="Gender" class="form-control" id="exampleFormControlSelect1" aria-placeholder="class">
+            <option value="" disabled selected>Gender</option>
+          <option value="F">F</option>
+          <option value="M">M</option>
+          <option value="Other">Other</option>
+        </select>
+        <!-- <input name="Gender" class="form-control" placeholder="gender" type="text"  > -->
+
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input name="passport_number" class="form-control" placeholder="Passport Number" type="text"  >
+    </div> <!-- form-group// -->
+
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-phone"></i> </span>
+		</div>
+        <input name="contact_number" class="form-control" placeholder="contact number" type="text" >
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
+		</div>
+        <input name="email" class="form-control" placeholder="email" type="email" >
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-map-marker-alt"></i> </span>
+		</div>
+        <textarea name="Address" class="form-control" placeholder="Address" rows=8 type="text" ></textarea>
+    </div> <!-- form-group// -->
+
+
+    <div class="form-group">
+        
+        <button type="submit" class="btn btn-primary btn-block">Book</button>
+    </div> <!-- form-group// -->      
+                                                                     
+</form>
+</article>
+</div> <!-- card.// -->
+
+<br><br>
+</body>

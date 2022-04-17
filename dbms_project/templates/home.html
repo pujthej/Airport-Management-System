@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/home.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/Passenger.css') }}"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Airport management system</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('employee')}}"
+                >Employee login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('employee_info')}}"
+                >Admin login</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                search flights
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="{{url_for('flight')}}"
+                    >By source and destination</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="{{url_for('flightnum')}}"
+                    >By flight number</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% include 'nav.html' %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/Passenger.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/home.css') }}"
+    />
+
+    <form action="{{url_for('searchpassenger')}} " , method="POST">
+      <div class="row search-form">
+        <div class="col-2">
+          <input
+            type="text"
+            class="form-control"
+            name="passport_number"
+            id="inputPassword2"
+            placeholder="passport number"
+          />
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary mb-2">
+            Check status
+          </button>
+        </div>
+      </div>
+    </form>
+
+    {% if num ==3 %} {% if value>0 %}
+    <div class="details alert alert-primary" role="alert">
+      <div class="heading">
+        <h5>Passenger details of PNUM :{{passenger_data[0][0]}}</h5>
+      </div>
+      <p><b>Ticket status </b>Confirmed</p>
+      <p><b>NAME: </b>{{passenger_data[0][1].capitalize()}}</p>
+      <p><b>Airline name: </b>{{passenger_data[0][2]}}</p>
+      <p><b>Departure: </b>{{passenger_data[0][3]}}</p>
+      <p><b>Arrival: </b>{{passenger_data[0][4]}}</p>
+    </div>
+
+    {% else %}
+    <div class="details alert alert-danger">
+      <div class="heading">
+        <h5>Passenger details not found</h5>
+      </div>
+    </div>
+
+    {% endif %} {% endif %}
+  </body>
+</html>

@@ -1,0 +1,23 @@
+body{
+    /* background-image:url('home1.jpg') !important; */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), */
+    /* url("ticket_background.jpg"); */
+   
+    z-index: 10;
+    background-size: cover;
+}
+.navbar{
+    background-color: #216ab8fb !important;
+    
+}
+.navbar-brand{
+    color: white !important;
+}
+.nav-link{
+    color: white !important;
+    /* margin-right: 20px; */
+    margin-left: 50px;
+    font-weight: bold;
+    /* margin-top: 15px; */
+    font-size: 1rem;
+}

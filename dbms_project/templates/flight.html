@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+</html><link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link rel="stylesheet" href= "{{ url_for('static',filename='styles/styles.css') }}">
+<title>flights</title>
+</head>
+<body>
+{% include 'nav.html'%}
+
+<article class="card-body mx-auto" style="max-width: 400px;">
+	{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+    {{message}}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+
+
+
+	<h4 class="card-title mt-3 text-center">Search flights</h4>
+	<form action="/flights" method="post">
+	<div class="form-group input-group">
+
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="source" class="form-control" placeholder="Source" type="text">
+    </div> <!-- form-group// -->
+   
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input name="destination" class="form-control" placeholder="destination" type="text">
+    </div> <!-- form-group// -->
+                                     
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Search </button>
+    </div> <!-- form-group// -->      
+                                                                     
+</form>
+
+
+
+</article>
+
+<!--container end.//-->
+{% if num==3 %}
+<table class="table table-striped ">
+    <thead class="table-dark">
+      <tr>
+          {% for i in range(0,9) %}
+        <th scope="col">{{col_name[i][0]}}</th>
+        {% endfor %}
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <!-- <th scope="col"> Name</th>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Designation</th>
+        <th scope="col">Rating</th>
+        <th scope="col"></th>
+        <th scope="col"></th> -->
+      </tr>
+    </thead>
+    <tbody>
+     
+      {% for i in flight_data %}
+      <tr>
+          {% for j in i %}
+      <td>{{j}}</td>
+      
+          {% endfor %}
+          {% if i[2]>0 %}
+          <td scope="col"><button class="btn btn-primary"><a href="{{url_for('book', flight_num = i.0)}}" class="link">Book</a></button></td>
+      {% elif i[2]== 0 %}
+      <td scope="col"><button class="btn btn-danger"><a href="{{url_for('flightnum', flight_num = i.0)}}" style="color: white;text-decoration: none;">Not available</a></button></td>
+      {% endif %}
+
+          <!-- <td scope="col"><button class="btn btn-primary"><a href="{{url_for('book', flight_num = i.0)}}">Book</a></button></td> -->
+      </tr>
+      {% endfor %}
+      </tbody>
+</table> 
+
+{% endif %}
+<br><br>
+</body>

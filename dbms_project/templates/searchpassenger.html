@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+</html><link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link rel="stylesheet" href= "{{ url_for('static',filename='styles/styles.css') }}">
+<title>flights</title>
+</head>
+<body>
+{% include 'nav.html'%}
+
+<article class="card-body mx-auto" style="max-width: 400px;">
+	{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+    {{message}}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+	<h4 class="card-title mt-3 text-center">Search Passenger</h4>
+
+
+	<form action="/searchPass" method="post">
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="flight_number" class="form-control" placeholder="flight number" type="text">
+    </div> <!-- form-group// -->
+                                     
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block "> Search </button>
+    </div> <!-- form-group// -->      
+                                                                     
+</form>
+</article>
+
+<!--container end.//-->
+{% if num==3 %}
+<table class="table table-striped ">
+    <thead class=" blue">
+      <tr>
+        <th class="scope">Passport number</th>
+        <th class="scope">First name</th>
+        <th class="scope">Second name</th>
+        <th class="scope">Contact number</th>
+        <th class="scope">Nationality</th>
+        <th class="scope">Gender</th>
+        <th class="scope">PNR</th>
+        <th class="scope">Seat number</th>
+        <th class="scope">Class</th>
+        <th class="scope"></th>
+        <th class="scope"></th>
+      </tr>
+    </thead>
+    <tbody>
+     
+        {% for i in passenger_data %}
+        <tr>
+            {% for j in i %}
+        <td>{{j}}</td>
+        
+            {% endfor %}
+            <td><button class="btn btn-dark"><a  href="{{url_for('deletePass', passport_number = i.0)}}" class="link">Delete</a></button></td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+  </table> 
+
+{% endif %}
+<br><br>
+</body>
